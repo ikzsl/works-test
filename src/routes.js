@@ -4,6 +4,9 @@ axios.defaults.baseURL = 'https://api.github.com';
 
 export const routes = {
   searchUsersUrl: () => '/search/users',
+  searchRepositoriesUrl: () => '/search/repositories',
+  getReadmeUrl: (owner, repo) => `/repos/${owner}/${repo}/readme`,
+  renderMarkdown: () => '/markdown',
   // userLoginUrl: () => 'users/login',
   // getProfileUrl: () => 'user',
   // getArticleUrl: (slug) => `articles/${slug}`,
