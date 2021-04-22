@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 
 .App-logo {
@@ -29,6 +29,14 @@ p {
 li {
   list-style: none;
   padding: 0;
+}
+
+.main-content {
+  display: flex;
+}
+
+.items-list {
+  width: 50%;
 }
 
 .App-link {

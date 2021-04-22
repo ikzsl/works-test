@@ -10,6 +10,7 @@ function App() {
   // const [userLogin, setUserLogin] = useState('');
   // const [users, setUsers] = useState([]);
   const [readme, setReadme] = useState('');
+  const [readmeHtml, setReadmeHtml] = useState('');
   const [repos, setRepos] = useState([]);
   const [value, setValue] = useState('ikzsl');
   const inputValue = useRef();
@@ -36,6 +37,7 @@ function App() {
   };
 
   const getReadme = (owner, repo) => {
+    console.log('ButtonClick - 2');
     axios
       .get(routes.getReadmeUrl(owner, repo), {
         params: {
@@ -44,15 +46,29 @@ function App() {
         },
       })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setReadme(response.data.content);
+        console.log('ButtonClick - 3');
+        onRenderMarkdown(response.data.content);
         // setRepos(response.data.items);
       });
   };
 
-  const onReadmiButtonClick = (owner, repo) => {
-    console.log('!!!!!!!!!!!', owner, repo);
-    getReadme(owner, repo);
+  const onReadmeButtonClick = async (owner, repo) => {
+    console.log('ButtonClick - 1');
+    await getReadme(owner, repo);
+    await console.log('ButtonClick - 4');
+    // onRenderMarkdown(readme);
+  };
+
+  const onRenderMarkdown = (text) => {
+    axios
+      .post(routes.postRenderMarkdown(), {
+        text: window.atob(text),
+      })
+      .then((response) => {
+        setReadmeHtml(response.data);
+      });
   };
 
   // const usersList = users.length
@@ -70,7 +86,7 @@ function App() {
           <p>{el.description}</p>
           <p>{el.language}</p>
           <p>{el.default_branch}</p>
-          <div onClick={() => onReadmiButtonClick(el.owner.login, el.name)}>show readme</div>
+          <div onClick={() => onReadmeButtonClick(el.owner.login, el.name)}>show readme</div>
           <hr />
         </li>
       ))
@@ -79,28 +95,21 @@ function App() {
   return (
     <div className='App'>
       <header className='App-header'>
-        {/* <img src={logo} className='App-logo' alt='logo' /> */}
-        {/* <Counter /> */}
-        <p>{routes.getReadmeUrl(repos[0]?.owner.login, repos[0]?.name)}</p>
         <form onSubmit={onSubmit}>
           <input type='text' name='search' ref={inputValue} />
-          <button type='submit'>search repos</button>
+          <button type='submit'>search repos by keywords</button>
         </form>
-        <div>
-          <ul>{reposList}</ul>
-
-          {/* <img src={userAvatar} height='100' alt='logo' /> */}
-          {/* <span>{userLogin}</span> */}
-        </div>
       </header>
-
-      
-        {window.atob(readme)}
-      
-
-      {/* <p>{value}</p> */}
+      <div className='main-content'>
+        <div className='items-list'>
+          <ul>{reposList}</ul>
+        </div>
+        <div className='content-field'>
+          <div dangerouslySetInnerHTML={{ __html: readmeHtml }}></div>
+          wkejrhj
+        </div>
+      </div>
     </div>
   );
 }
-
 export default App;
