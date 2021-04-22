@@ -1,15 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-// import logo from './logo.svg';
-// import { Counter } from './features/counter/Counter';
 import './App.css';
 import axios from 'axios';
 import { routes } from './routes';
 
 function App() {
-  // const [userLogin, setUserLogin] = useState('');
-  // const [users, setUsers] = useState([]);
-  const [readme, setReadme] = useState('');
   const [readmeHtml, setReadmeHtml] = useState('');
   const [repos, setRepos] = useState([]);
   const [value, setValue] = useState('ikzsl');
@@ -24,20 +19,16 @@ function App() {
         },
       })
       .then((response) => {
-        console.log(response.data.items);
-        // setUsers(response.data.items);
         setRepos(response.data.items);
       });
   }, [value]);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(inputValue.current.value);
     setValue(inputValue.current.value);
   };
 
   const getReadme = (owner, repo) => {
-    console.log('ButtonClick - 2');
     axios
       .get(routes.getReadmeUrl(owner, repo), {
         params: {
@@ -46,19 +37,12 @@ function App() {
         },
       })
       .then((response) => {
-        // console.log(response.data);
-        setReadme(response.data.content);
-        console.log('ButtonClick - 3');
         onRenderMarkdown(response.data.content);
-        // setRepos(response.data.items);
       });
   };
 
-  const onReadmeButtonClick = async (owner, repo) => {
-    console.log('ButtonClick - 1');
-    await getReadme(owner, repo);
-    await console.log('ButtonClick - 4');
-    // onRenderMarkdown(readme);
+  const onReadmeButtonClick = (owner, repo) => {
+    getReadme(owner, repo);
   };
 
   const onRenderMarkdown = (text) => {
@@ -71,24 +55,13 @@ function App() {
       });
   };
 
-  // const usersList = users.length
-  //   ? users.map((el) => (
-  //       <li>
-  //         <img src={el.avatar_url} alt='avatar' height='20' /> {el.login}
-  //       </li>
-  //     ))
-  //   : null;
-
   const reposList = repos.length
     ? repos.map((el) => (
-        <li>
-          {el.full_name}
-          <p>{el.description}</p>
-          <p>{el.language}</p>
-          <p>{el.default_branch}</p>
-          <div onClick={() => onReadmeButtonClick(el.owner.login, el.name)}>show readme</div>
-          <hr />
-        </li>
+        <tr className='list-item' onClick={() => onReadmeButtonClick(el.owner.login, el.name)}>
+          <td>{el.full_name}</td>
+          <td>{el.description}</td>
+          <td>{el.language}</td>
+        </tr>
       ))
     : null;
 
@@ -102,13 +75,22 @@ function App() {
       </header>
       <div className='main-content'>
         <div className='items-list'>
-          <ul>{reposList}</ul>
+          <table>
+            <thead>
+              <tr>
+                <th> Name </th>
+                <th> Description </th>
+                <th> Language </th>
+              </tr>
+            </thead>
+            {reposList}
+          </table>
         </div>
         <div className='content-field'>
           <div dangerouslySetInnerHTML={{ __html: readmeHtml }}></div>
-          wkejrhj
         </div>
       </div>
+      <a href='/'>details</a>
     </div>
   );
 }
