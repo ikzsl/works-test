@@ -15,7 +15,7 @@ function App() {
       .get(routes.searchRepositoriesUrl(), {
         params: {
           q: value,
-          per_page: 5,
+          per_page: 20,
         },
       })
       .then((response) => {
