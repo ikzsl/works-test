@@ -28,12 +28,14 @@ li {
 .main-content {
   width: 95%;
   display: flex;
+  justify-content: space-around;
   margin: 10px;
   min-height: 80vh;
 }
 
 .items-list {
   padding: 20px;
+  margin: 10px;
   border: 1px gray solid;
   border-radius: 10px;
   max-height: 80vh;
@@ -44,6 +46,7 @@ li {
 
 .content-field {
   padding: 20px;
+  margin: 10px;
   border: 1px gray solid;
   border-radius: 10px;
   max-height: 80vh;
