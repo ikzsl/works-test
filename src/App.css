@@ -29,7 +29,7 @@ li {
   width: 95%;
   display: flex;
   justify-content: space-around;
-  margin: 10px;
+  margin: 0 10px;
   min-height: 80vh;
 }
 
@@ -95,6 +95,8 @@ td {
   border: 2px solid lightgray;
   max-width: 200px;
   padding: 10px;
+  margin-right: 50px;
+  align-self: flex-end;
 }
 
 .button:hover {
@@ -104,3 +106,4 @@ td {
 .button:active {
   background-color: rgb(196, 192, 192);
 }
+

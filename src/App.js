@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { NavLink } from 'react-router-dom';
 
 import './App.css';
 import axios from 'axios';
@@ -7,7 +8,8 @@ import { routes } from './routes';
 function App() {
   const [readmeHtml, setReadmeHtml] = useState('');
   const [repos, setRepos] = useState([]);
-  const [value, setValue] = useState('ikzsl');
+  const [value, setValue] = useState('awesome');
+  const [currentItem, setCurrentItem] = useState('/');
   const inputValue = useRef();
 
   useEffect(() => {
@@ -45,6 +47,7 @@ function App() {
 
   const onReadmeButtonClick = (owner, repo) => {
     getReadme(owner, repo);
+    setCurrentItem(`${owner}/${repo}`);
   };
 
   const onRenderMarkdown = (text) => {
@@ -59,7 +62,11 @@ function App() {
 
   const reposList = repos.length
     ? repos.map((el) => (
-        <tr key={el.id} className='list-item' onClick={() => onReadmeButtonClick(el.owner.login, el.name)}>
+        <tr
+          key={el.id}
+          className='list-item'
+          onClick={() => onReadmeButtonClick(el.owner.login, el.name)}
+        >
           <td>{el.full_name}</td>
           <td>{el.description}</td>
           <td>{el.language}</td>
@@ -74,6 +81,7 @@ function App() {
           <input type='text' name='search' ref={inputValue} />
           <button type='submit'>search repos by keywords</button>
         </form>
+        <span>{currentItem}</span>
       </header>
       <div className='main-content'>
         <div className='items-list'>
@@ -85,14 +93,17 @@ function App() {
                 <th> Language </th>
               </tr>
             </thead>
-            <tbody>{reposList}</tbody>
+            <tbody >{reposList}</tbody>
           </table>
         </div>
         <div className='content-field'>
           <div dangerouslySetInnerHTML={{ __html: readmeHtml }}></div>
         </div>
       </div>
-      <div className='button'>details</div>
+
+      <NavLink to={`/item/${currentItem}`} className='button'>
+        details
+      </NavLink>
     </div>
   );
 }
