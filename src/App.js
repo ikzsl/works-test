@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
-
 import './App.css';
 import axios from 'axios';
 import { routes } from './routes';
+import { Button, TextField } from '@material-ui/core';
 
 function App() {
   const [readmeHtml, setReadmeHtml] = useState('');
@@ -78,10 +78,11 @@ function App() {
     <div className='App'>
       <header className='App-header'>
         <form onSubmit={onSubmit}>
-          <input type='text' name='search' ref={inputValue} />
-          <button type='submit'>search repos by keywords</button>
+          <TextField variant='outlined' size='small' type='text' name='search' ref={inputValue} />
+          <Button type='submit' variant='contained' color='primary' >
+            search repos by keywords
+          </Button>
         </form>
-        <span>{currentItem}</span>
       </header>
       <div className='main-content'>
         <div className='items-list'>
@@ -93,16 +94,18 @@ function App() {
                 <th> Language </th>
               </tr>
             </thead>
-            <tbody >{reposList}</tbody>
+            <tbody>{reposList}</tbody>
           </table>
         </div>
         <div className='content-field'>
           <div dangerouslySetInnerHTML={{ __html: readmeHtml }}></div>
         </div>
       </div>
-
       <NavLink to={`/item/${currentItem}`} className='button'>
+      <Button variant='contained' color='primary'>
+        
         details
+      </Button>
       </NavLink>
     </div>
   );

@@ -88,7 +88,7 @@ td {
 
 .button {
   /* display: inline-block; */
-  text-decoration: none;
+  /* text-decoration: none;
   text-transform: uppercase;
   color: inherit;
   border-radius: 10px;
@@ -96,7 +96,7 @@ td {
   max-width: 200px;
   padding: 10px;
   margin-right: 50px;
-  align-self: flex-end;
+  align-self: flex-end; */
 }
 
 .button:hover {

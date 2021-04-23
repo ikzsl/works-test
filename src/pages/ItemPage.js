@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { Button, TextField } from '@material-ui/core';
 
 import axios from 'axios';
 import { routes } from '../routes';
@@ -45,7 +46,9 @@ export default function ItemPage() {
   return (
     <div>
       <header>
-        <Link to='/'>Home</Link>
+        <Link to='/'>
+          <Button variant='contained' color='primary'>Home</Button>
+        </Link>
         <h1>itemPage</h1>
         {owner} {repo}
       </header>
