@@ -23,6 +23,8 @@ function App() {
       });
   }, [value]);
 
+  const b64_to_utf8 = (str) => decodeURIComponent(escape(window.atob(str)));
+
   const onSubmit = (e) => {
     e.preventDefault();
     setValue(inputValue.current.value);
@@ -48,7 +50,7 @@ function App() {
   const onRenderMarkdown = (text) => {
     axios
       .post(routes.postRenderMarkdown(), {
-        text: window.atob(text),
+        text: b64_to_utf8(text),
       })
       .then((response) => {
         setReadmeHtml(response.data);
@@ -57,7 +59,7 @@ function App() {
 
   const reposList = repos.length
     ? repos.map((el) => (
-        <tr className='list-item' onClick={() => onReadmeButtonClick(el.owner.login, el.name)}>
+        <tr key={el.id} className='list-item' onClick={() => onReadmeButtonClick(el.owner.login, el.name)}>
           <td>{el.full_name}</td>
           <td>{el.description}</td>
           <td>{el.language}</td>
@@ -83,14 +85,14 @@ function App() {
                 <th> Language </th>
               </tr>
             </thead>
-            {reposList}
+            <tbody>{reposList}</tbody>
           </table>
         </div>
         <div className='content-field'>
           <div dangerouslySetInnerHTML={{ __html: readmeHtml }}></div>
         </div>
       </div>
-      <a href='/'>details</a>
+      <div className='button'>details</div>
     </div>
   );
 }

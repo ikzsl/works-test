@@ -2,6 +2,8 @@
   /* text-align: center; */
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .App-header {
@@ -24,6 +26,7 @@ li {
 }
 
 .main-content {
+  width: 95%;
   display: flex;
   margin: 10px;
   min-height: 80vh;
@@ -57,7 +60,6 @@ table {
 td {
   padding: 0 10px;
   border: 2px solid lightgray;
-  
 }
 
 .list-item {
@@ -73,11 +75,29 @@ td {
   background-color: rgb(230, 230, 230);
 }
 
-
 .list-item:vidited {
   background-color: green;
 }
 
 .App-link {
   color: rgb(112, 76, 182);
+}
+
+.button {
+  /* display: inline-block; */
+  text-decoration: none;
+  text-transform: uppercase;
+  color: inherit;
+  border-radius: 10px;
+  border: 2px solid lightgray;
+  max-width: 200px;
+  padding: 10px;
+}
+
+.button:hover {
+  background-color: rgb(230, 230, 230);
+}
+
+.button:active {
+  background-color: rgb(196, 192, 192);
 }
