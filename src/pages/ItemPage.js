@@ -21,26 +21,18 @@ export default function ItemPage() {
         },
       })
       .then((response) => {
-        console.log(response.data.items);
         setFiles(response.data.items);
       });
   }, []);
 
   const getFile = (gitUrl) => {
-    axios
-    .get(gitUrl)
-    .then((response) => {
-      console.log(b64_to_utf8(response.data.content));
-      
-      setDecodedFile(b64_to_utf8(response.data.content))
-      // setFiles(response.data.items);
+    axios.get(gitUrl).then((response) => {
+      setDecodedFile(b64_to_utf8(response.data.content));
     });
-
-  }
+  };
 
   const onFileButtonClick = (item) => {
-    console.log(item.git_url);
-    getFile(item.git_url)
+    getFile(item.git_url);
   };
 
   const filesList = files.map((item) => (
