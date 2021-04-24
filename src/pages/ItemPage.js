@@ -37,7 +37,7 @@ export default function ItemPage() {
   };
 
   const filesList = files.map((item) => (
-    <tr onClick={() => onFileButtonClick(item)}>
+    <tr onClick={() => onFileButtonClick(item)} key={`${item.path}${item.name}`}>
       <td>{item.name}</td>
       <td>{item.path}</td>
     </tr>
@@ -47,7 +47,9 @@ export default function ItemPage() {
     <div>
       <header>
         <Link to='/'>
-          <Button variant='contained' color='primary'>Home</Button>
+          <Button variant='contained' color='primary'>
+            Home
+          </Button>
         </Link>
         <h1>itemPage</h1>
         {owner} {repo}
@@ -56,8 +58,10 @@ export default function ItemPage() {
       <div className={styles.container}>
         <table className={styles.table}>
           <thead>
-            <th>file name</th>
-            <th>path</th>
+            <tr>
+              <th>file name</th>
+              <th>path</th>
+            </tr>
           </thead>
           <tbody>{filesList}</tbody>
         </table>
