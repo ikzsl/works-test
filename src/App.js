@@ -78,7 +78,7 @@ function App() {
     <div className='App'>
       <header className='App-header'>
         <form onSubmit={onSubmit}>
-          <TextField variant='outlined' size='small' type='text' name='search' ref={inputValue} />
+          <TextField variant='outlined' size='small' type='text' name='search' inputRef={inputValue} />
           <Button type='submit' variant='contained' color='primary' >
             search repos by keywords
           </Button>
