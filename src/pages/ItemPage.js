@@ -8,6 +8,9 @@ import { routes } from '../routes';
 import styles from './Item.module.css';
 
 const b64_to_utf8 = (str) => decodeURIComponent(escape(window.atob(str)));
+  //TODO: вынести в хелперы
+  //FIXME: вынести  асинхронщину
+
 
 export default function ItemPage() {
   const { owner, repo } = useParams();

@@ -26,6 +26,7 @@ function App() {
   }, [value]);
 
   const b64_to_utf8 = (str) => decodeURIComponent(escape(window.atob(str)));
+  //TODO: вынести в хелперы
 
   const onSubmit = (e) => {
     e.preventDefault();
