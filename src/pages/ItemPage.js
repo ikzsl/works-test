@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Button, TextField } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 import axios from 'axios';
 import { routes } from '../routes';
@@ -27,7 +27,7 @@ export default function ItemPage() {
       .then((response) => {
         setFiles(response.data.items);
       });
-  }, []);
+  }, [owner, repo]);
 
   const getFile = (gitUrl) => {
     axios.get(gitUrl).then((response) => {
